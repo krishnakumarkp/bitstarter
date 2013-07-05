@@ -1,9 +1,20 @@
+var fs = require("fs");
 var express = require('express');
 
 var app = express.createServer(express.logger());
 
+var indexFile = './index.html';
+
 app.get('/', function(request, response) {
-  response.send('Hello World 2!');
+  fs.exists(indexFile,function(exists){
+    if(exists){
+      var indexFileContent = fs.readFileSync(indexFile);
+      response.send(indexFileContent.toString("utf8"));
+    }else {
+      console.error('Couldnot find file:'+indexFile);
+      response.send("File not found");
+    }
+  });
 });
 
 var port = process.env.PORT || 5000;
