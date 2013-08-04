@@ -17,7 +17,7 @@ app.get('/', function(request, response) {
   });
 });
 
-app.use("/images", express.static(__dirname + "/images");
+app.use("/images", express.static(__dirname + "/images"));
 
 var port = process.env.PORT || 8080;
 app.listen(port, function() {
